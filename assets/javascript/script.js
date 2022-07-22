@@ -26,6 +26,7 @@ function getPasswordLength() {
   return passwordLength;
 }
 
+// This function returns a random integer number from (>=) min to (<=) max
 function getRandomIntegerNumber(min, max) {
   return Math.floor(Math.random() * (max-min)) + min;
 }
@@ -44,12 +45,18 @@ function generatePassword() {
     
     var randomCharacter;
   
+    // insert each characters into password
     for (var i = 0; i < passwordLength; i++) {
       var isTrue = true;
 
+      // Repeat until we get a good randomCharacter that meets user's criterias
       while (isTrue) {
         isTrue = false;
+
+        // All characters (special, numeric, uppercase, lowercase) from 32 to 126 CharCode
         randomCharacter = getRandomIntegerNumber(32, 126);
+        
+        // Checking if randomCharacter meets user's criterias
         if (randomCharacter >= 97 && randomCharacter <= 122) {
           if (!isLowercase)  isTrue = true;
         } else if (randomCharacter >= 65 && randomCharacter <= 90) {
@@ -61,6 +68,7 @@ function generatePassword() {
         }
       }
 
+      // expand password with the good randomCharacter
       password = password + String.fromCharCode(randomCharacter);
     }
   }
